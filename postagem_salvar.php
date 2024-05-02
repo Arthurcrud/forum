@@ -7,8 +7,6 @@
 </head>
 <body>
 <?php
-	$conectar = mysqli_connect ("localhost", "root", "", "352462");
-	
 	$titulo = $_POST["titulo"];
 	$conteudo = $_POST["conteudo"];
 	$tipo = $_POST["tipo"];

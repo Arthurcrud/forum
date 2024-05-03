@@ -6,6 +6,7 @@
     var instances = M.Modal.init(elems);
   });
 </script>
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
 </body>
 
 </html>

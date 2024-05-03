@@ -54,11 +54,8 @@ session_start();
 																				echo "selected";
 																			}
 																			?>> Guitarra </option>
-						<option value="baixo" <?php
-																	if ($registro[3] == "baixo") {
-																		echo "selected";
-																	}
-																	?>> Baixo </option>
+						<option value="baixo" selected="<?php if ($registro[3] === "baixo") echo "true" ?>" </option>
+
 						<option value="violao" <?php
 																		if ($registro[3] == "violao") {
 																			echo "selected";

@@ -1,0 +1,140 @@
+.modal-title {
+  padding: 15px;
+  color: #fff;
+}
+
+.main-content {
+  margin-top: 15px;
+}
+
+/* Header */
+.header-container {
+  background-color: #111e2d;
+  padding: 0 35px;
+}
+
+/* Main */
+
+.main--sidebar {
+  background: #fff;
+  height: calc(100vh - 87px);
+  padding: 0 !important;
+  border-right: 0 solid rgba(0, 0, 0, 0.125);
+  box-shadow: 0 0px 3px 0 rgba(0, 0, 0, 0.1), 0 5px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.main--sidebar__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.main--sidebar__btn-container {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0px 15px 10px;
+}
+
+.content-header {
+  width: 110%;
+  background-color: #fff;
+  margin-left: -10px;
+  height: 100vh;
+  max-height: 62px;
+  margin-bottom: 15px;
+  padding-right: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.content-header input {
+  max-width: 120px;
+  height: calc(1.5em + 0.5rem + 2px) !important;
+  padding: 0.25rem 0.5rem !important ;
+  font-size: 0.875rem !important ;
+  line-height: 1.5 !important ;
+  border-radius: 0.2rem !important ;
+  background-color: #fff !important ;
+  background-clip: padding-box !important ;
+  border: 1px solid #ced4da !important ;
+  margin-top: 10px !important;
+}
+
+.content-header input::placeholder {
+  color: gray;
+}
+
+.content-header input:focus {
+  box-shadow: none !important;
+}
+
+/* Posts */
+.post-container {
+  background-color: #fff;
+  border: 0 solid rgba(0, 0, 0, 0.125);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border-radius: 5px;
+  position: relative;
+  padding-bottom: 40px;
+  margin-bottom: 20px;
+}
+
+.user-status-report {
+  position: absolute;
+  bottom: 10px;
+  left: 90px;
+}
+
+.post-container-content {
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  padding: 15px 20px;
+  height: 100%;
+  min-height: 190px;
+  max-height: 190px;
+}
+
+.post-container .avatar img {
+  width: 60px;
+  min-width: 60px;
+  border-radius: 50%;
+}
+
+.post-container .content {
+  padding: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.post-container .content .content-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.post-container .content p:last-child {
+  padding-top: 15px;
+  font-size: 14px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+}
+
+.post-container .status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.post-container .status p {
+  display: flex;
+  gap: 2px;
+  font-size: 14px;
+  color: #6c757d;
+}

@@ -12,11 +12,6 @@ body {
   background-color: #e2e8f0;
 }
 
-.modal-title {
-  padding: 15px;
-  color: #fff;
-}
-
 textarea {
   resize: none;
   height: 250px;
@@ -28,7 +23,7 @@ textarea::placeholder {
   font-size: 24px;
 }
 
-.sidebar {
-  background: #fff;
-  height: calc(100vh - 87px);
+img {
+  max-width: 100%;
+  display: block;
 }

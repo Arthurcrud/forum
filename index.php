@@ -50,7 +50,7 @@ include_once "php_actions/db_connection.php";
 						posts 
 				INNER JOIN 
 						users ON posts.user_id = users.id
-				WHERE posts.content LIKE '$searchParam%' OR posts.title LIKE '$searchParam%'";
+				WHERE posts.content LIKE '%$searchParam%' OR posts.title LIKE '%$searchParam%'";
 			} else {
 				$sql = "SELECT 
 				posts.*, 

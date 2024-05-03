@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_SESSION['message'])) {
-?>
+  ?>
   <!-- <script>
     window.onload = function() {
       M.toast({
@@ -10,5 +10,5 @@ if (isset($_SESSION['message'])) {
       });
     }
   </script> -->
-<?php
+  <?php
 }

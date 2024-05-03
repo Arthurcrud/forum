@@ -24,7 +24,8 @@ include_once "php_actions/db_connection.php";
 		<div class="col s3 main--sidebar">
 			<!-- Modal Trigger -->
 			<div class="main--sidebar__btn-container">
-				<a class="waves-effect waves-light modal-trigger btn blue main--sidebar__btn" style="width:100%; margin-top:15px;" href="#modal1">
+				<a class="waves-effect waves-light modal-trigger btn blue main--sidebar__btn"
+					style="width:100%; margin-top:15px;" href="#modal1">
 					<i class="ph-bold ph-plus"></i>
 					<span>
 						Novo Post
@@ -65,14 +66,14 @@ include_once "php_actions/db_connection.php";
 
 			$resultado = mysqli_query($connect, $sql);
 
-			if(empty($resultado)){
+			if (empty($resultado)) {
 				echo "<div class='center-align'>
 				 <p>Nenhum resultado encontrado para: $searchParam</p>
 				</div>";
 			}
 
 			while ($dados = mysqli_fetch_array($resultado)) {
-			?>
+				?>
 				<div class="post-container">
 					<div class="post-container-content">
 						<div class="avatar">
@@ -103,9 +104,10 @@ include_once "php_actions/db_connection.php";
 							</p>
 						</div>
 					</div>
-					<p class="user-status-report"><span style="color:blue"><?php echo $dados['username'] ?></span> postado a <span style="font-weight:600;"><?php echo $dados['minutes'] ?> minutos atrás</span></p>
+					<p class="user-status-report"><span style="color:blue"><?php echo $dados['username'] ?></span> postado a <span
+							style="font-weight:600;"><?php echo $dados['minutes'] ?> minutos atrás</span></p>
 				</div>
-			<?php
+				<?php
 			} ?>
 
 		</div>

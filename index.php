@@ -1,6 +1,7 @@
 <?php
 include_once "includes/header.php";
 include_once "includes/message.php";
+include_once "includes/functions.php";
 include_once "php_actions/db_connection.php";
 ?>
 
@@ -9,7 +10,7 @@ include_once "php_actions/db_connection.php";
 		<div class="nav-wrapper px-4 header-container">
 			<a href="#" class="brand-logo">Logo</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
-				<li><a href="login.php">Login</a></li>
+				<li><a href="pages/login.php">Login</a></li>
 				<li><a href="lista_postagem.php">Notícias</a></li>
 				<li><a href="topicos.php">Tópicos</a></li>
 				<li><a href="collapsible.html">Sair</a></li>
@@ -17,11 +18,8 @@ include_once "php_actions/db_connection.php";
 		</div>
 	</nav>
 </header>
+
 <main class="container">
-	<?php
-	$sql = "SELECT * FROM POSTS";
-	$result = mysqli_query($connect, $sql);
-	?>
 	<div class="row" style="margin-top:40px">
 		<div class="col s3 main--sidebar">
 			<!-- Modal Trigger -->
@@ -37,19 +35,42 @@ include_once "php_actions/db_connection.php";
 		</div>
 		<div class="col s9">
 			<div class="content-header">
-				<input type="text" name="" id="" placeholder="Pesquisar no forum">
+				<input type="text" name="" id="search-input" placeholder="Pesquisar no forum">
 			</div>
 			<?php
-			$sql = "SELECT 
-			posts.*, 
-			users.username, 
-			TIMESTAMPDIFF(MINUTE, posts.created_at, NOW()) AS minutes
-			FROM 
-					posts 
-			INNER JOIN 
-					users ON posts.user_id = users.id";
+
+
+			if (isset($_GET['search'])) {
+				$searchParam = clear($_GET['search']);
+				$sql = "SELECT 
+				posts.*, 
+				users.username, 
+				TIMESTAMPDIFF(MINUTE, posts.created_at, NOW()) AS minutes
+				FROM 
+						posts 
+				INNER JOIN 
+						users ON posts.user_id = users.id
+				WHERE posts.content LIKE '$searchParam%' OR posts.title LIKE '$searchParam%'";
+			} else {
+				$sql = "SELECT 
+				posts.*, 
+				users.username, 
+				TIMESTAMPDIFF(MINUTE, posts.created_at, NOW()) AS minutes
+				FROM 
+						posts 
+				INNER JOIN 
+						users ON posts.user_id = users.id";
+			}
+
 
 			$resultado = mysqli_query($connect, $sql);
+
+			if(empty($resultado)){
+				echo "<div class='center-align'>
+				 <p>Nenhum resultado encontrado para: $searchParam</p>
+				</div>";
+			}
+
 			while ($dados = mysqli_fetch_array($resultado)) {
 			?>
 				<div class="post-container">
@@ -82,7 +103,7 @@ include_once "php_actions/db_connection.php";
 							</p>
 						</div>
 					</div>
-					<p class="user-status-report"><span style="color:blue"><?php echo $dados['username'] ?></span> postado a <span style="font-weight:600;"><?php echo $dados['minutes']?> minutos atrás</span></p>
+					<p class="user-status-report"><span style="color:blue"><?php echo $dados['username'] ?></span> postado a <span style="font-weight:600;"><?php echo $dados['minutes'] ?> minutos atrás</span></p>
 				</div>
 			<?php
 			} ?>
@@ -109,6 +130,8 @@ include_once "php_actions/db_connection.php";
 	</form>
 </div>
 
+
 <?php
-include_once "includes/footer.php"
+include_once "includes/scripts.php";
+include_once "includes/footer.php";
 ?>

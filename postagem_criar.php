@@ -8,11 +8,11 @@
 </head>
 
 <body>
-	<?php 
-	include_once("php_actions/db_connection.php")
-	?>
+	<?php
+	include_once ("php_actions/db_connection.php")
+		?>
 
-	
+
 </body>
 
 </html>

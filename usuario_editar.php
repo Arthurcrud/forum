@@ -5,27 +5,27 @@ include_once "includes/message.php";
 ?>
 
 <header>
-	<nav>
-		<div class="nav-wrapper px-4 #ffd0dd header-container">
-			<a href="#" class="brand-logo">Eva's News</a>
-			<ul id="nav-mobile" class="right hide-on-med-and-down">
-				<li><a href="index.php">Home</a></li>
-			    <li><a href="usuario_cadastrar.php">Cadastro</a></li>
-			    <li><a href="login.php">Login</a></li>
-				<li><a href="logout.php">Sair</a></li>
-			</ul>
-		</div>
-	</nav>
+    <nav>
+        <div class="nav-wrapper px-4 #ffd0dd header-container">
+            <a href="#" class="brand-logo">Eva's News</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="index.php">Home</a></li>
+                <li><a href="usuario_cadastrar.php">Cadastro</a></li>
+                <li><a href="login.php">Login</a></li>
+                <li><a href="logout.php">Sair</a></li>
+            </ul>
+        </div>
+    </nav>
 </header>
 
 
 <h1>Editar Usuário</h1>
-<?php 
-    $sql = "SELECT * FROM users WHERE id=".$_REQUEST['id'];
+<?php
+$sql = "SELECT * FROM users WHERE id=" . $_REQUEST['id'];
 
-    $res = $conn->query($sql);
+$res = $conn->query($sql);
 
-    $row = $res->fetch_object();
+$row = $res->fetch_object();
 ?>
 <form action="?page=usuario-salvar" method="POST">
     <input type="hidden" name="acao" value="editar">
@@ -38,6 +38,6 @@ include_once "includes/message.php";
         <label>Email</label>
         <input type="email" name="email" class="form-control" value="<?php print $row->email ?>" required>
     </div>
-        <button class="btn btn-success">Enviar</button>
+    <button class="btn btn-success">Enviar</button>
     </div>
 </form>

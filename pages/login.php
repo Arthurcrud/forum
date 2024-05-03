@@ -55,12 +55,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <main class="container">
         <h2>Login</h2>
-        <?php if (isset($error_message)) : ?>
+        <?php if (isset($error_message)): ?>
             <p><?php echo $error_message; ?></p>
         <?php endif; ?>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" class="input-field" ><br><br>
+            <input type="email" id="email" name="email" class="input-field"><br><br>
             <label for="password">Senha:</label>
             <input type="password" id="password" name="password" class="input-field" required><br><br>
             <button type="submit">Entrar</button>

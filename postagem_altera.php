@@ -50,17 +50,18 @@ session_start();
 				<p>
 					Tipo: <select name="tipo">
 						<option value="guitarra" <?php
-																			if ($registro[3] == "guitarra") {
-																				echo "selected";
-																			}
-																			?>> Guitarra </option>
-						<option value="baixo" selected="<?php if ($registro[3] === "baixo") echo "true" ?>" </option>
+						if ($registro[3] == "guitarra") {
+							echo "selected";
+						}
+						?>> Guitarra </option>
+						<option value="baixo" selected="<?php if ($registro[3] === "baixo")
+							echo "true" ?>" </option>
 
-						<option value="violao" <?php
-																		if ($registro[3] == "violao") {
-																			echo "selected";
-																		}
-																		?>> Violão </option>
+							<option value="violao" <?php
+						if ($registro[3] == "violao") {
+							echo "selected";
+						}
+						?>> Violão </option>
 					</select>
 				</p>
 				<p> <input type="submit" value="Alterar Amplificador"> </p>

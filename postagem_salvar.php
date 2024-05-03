@@ -1,35 +1,61 @@
-<!DOCTYPE html>
-<html lang="PT-BR">
+<?php
+    switch ($_REQUEST['acao']) {
+        case 'cadastrar':
+           $content = $_POST['content'];
+           $tittle = $_POST['tittle'];
+           
+           $sql = "INSERT INTO posts (content, tittle) 
+                    VALUES ('{$content}', '{$tittle}')";
+               
+            $res = $conn->query($sql);
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Criar Postagem</title>
-</head>
+            if($res==true){
+                print "<script>alert('Cadastrou com sucesso');</script>";
+                print "<script>location.href='?page=postagem_listar';</script>";
+            }else{
+                print "<script>alert('Não foi possível');</script>";
+                print "<script>location.href='?page=postagem_listar';</script>";
+            }
+            break;
+    
+       
+		case 'editar':
+			$content = $_POST['content'];
+			$tittle = $_POST['tittle'];
 
-<body>
-	<?php
-	$titulo = $_POST["title"];
-	$conteudo = $_POST["content"];
+			$sql = "UPDATE posts SET
+                        content = '{$content}',
+                        tittle = '{$tittle}',
+                    WHERE
+                        id=".$_REQUEST['id'];
 
-	$sql_cadastrar = "INSERT INTO posts (title, content) VALUES ('$titulo', '$conteudo'";
+            $res = $conn->query($sql);
 
-	$sql_resultado_cadastrar = mysqli_query($conectar, $sql_cadastrar);
+            if($res==true)
+            {
+                print "<script>alert('Editado com sucesso');</script>";
+                print "<script>location.href='?page=postagem_listar';</script>";
+            }
+            else
+            {
+                print "<script>alert('Falha ao editar');</script>";
+                print "<script>location.href='?page=postagem_listar';</script>";
 
-	if ($sql_resultado_cadastrar == true) {
-		$_SESSION['message'] = "Postagem criada com sucesso";
-		echo "<script>
-					location.href = ('index.php')
-				  </script>";
-	} else {
-		echo "<script>
-						alert ('Ocorreu um erro no servidor ao tentar cadastrar')
-					  </script>";
-		echo "<script>
-						location.href = ('cadastrapost.php')
-					  </script>";
-	}
-	?>
-</body>
-
-</html>
+            }
+			break;
+            case 'excluir':
+                $sql = "DELETE FROM posts WHERE id=".$_REQUEST['id'];
+    
+                $res = $conn->query($sql);
+    
+                    if($res==true){
+                        print "<script>alert('Excluiu com sucesso');</script>";
+                        print "<script>location.href='?page=postagem_listar';</script>";
+                    }else{
+                        print "<script>alert('Não foi possível');</script>";
+                        print "<script>location.href='?page=postagem_listar';</script>";
+                    }
+                break;
+        
+        }
+    ?>	

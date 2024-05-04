@@ -8,8 +8,9 @@ if (isset($_SESSION["user_id"])) {
 
   $title = mysqli_escape_string($connect, $_POST['title']);
   $content = mysqli_escape_string($connect, $_POST['content']);
+  $postId = mysqli_escape_string($connect, $_POST['id']);
 
-  $sql = "UPDATE posts SET title = '$title', content = '$content'";
+  $sql = "UPDATE posts SET title = '$title', content = '$content' WHERE posts.id = $postId";
   $result = mysqli_query($connect, $sql);
 
   if ($result) {

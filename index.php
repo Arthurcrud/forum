@@ -136,6 +136,7 @@ if (isset($_GET['post_id'])) {
 					</div>
 					<div class="modal-content">
 						<p>title</p>
+						<input type="hidden" name="id" value="<?php echo $post['id'] ?>">
 						<input required ="text" placeholder="Enter Title" name="title" id="post-title" class="post-input" value="<?php echo $post['title'] ?>" >
 						<textarea required ="60" rows="40" name="content" placeholder="Escreva sua postagem..." id="post-content" class="post-input" ><?php echo $post['content'] ?></textarea>
 					</div>

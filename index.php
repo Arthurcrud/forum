@@ -132,7 +132,7 @@ if (isset($_GET['post_id'])) {
 			<div id="modal2" class="modal">
 				<form action="php_actions/update_post.php" method="post">
 					<div class="blue modal-title">
-						<p>New Discussion</p>
+						<p>Edit Discussion</p>
 					</div>
 					<div class="modal-content">
 						<p>title</p>
@@ -142,7 +142,7 @@ if (isset($_GET['post_id'])) {
 					</div>
 					<div class="modal-footer">
 						<button class="waves-effect waves-green btn blue" name="btn-enviar" id="btn-enviar">Enviar</button>
-						<!-- <a href="postagem_criar.php" class="modal-close waves-effect waves-green btn-flat">Criar</a> -->
+						<button type="button" class="waves-effect waves-green btn red delete-btn">Apagar</button>
 					</div>
 				</form>
 			</div>
@@ -150,7 +150,6 @@ if (isset($_GET['post_id'])) {
 }
 }
 ?>
-
 
 
 <?php

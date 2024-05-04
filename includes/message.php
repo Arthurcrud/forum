@@ -11,4 +11,5 @@ if (isset($_SESSION['message'])) {
       }
     </script>
     <?php
+    unset($_SESSION['mensagem']);
 }

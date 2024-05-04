@@ -10,7 +10,6 @@ if (isset($_SESSION["user_id"])) {
   $content = mysqli_escape_string($connect, $_POST['content']);
   $userId = $_SESSION["user_id"];
 
-
   $sql = "INSERT INTO posts (title, content, user_id) VALUES ('$title', '$content', '$userId')";
   $result = mysqli_query($connect, $sql);
 

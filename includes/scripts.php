@@ -1,5 +1,38 @@
 <script defer>
-  // Input de pesquisa para filtrar os posts //////////////////////
+ ////////////// Post Modal Scripts ////////////////
+  window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const modalOpen = Boolean(urlParams.get('modal'));
+
+    if(modalOpen){
+      const editModal = document.getElementById("modal2");
+      var instance = M.Modal.getInstance(editModal)
+      instance.open();
+    }
+  }
+
+  const postContainer = document.querySelector("#posts");
+
+  postContainer?.addEventListener("click", (e) => {
+    const target = e.target;
+
+    if(target.classList.contains("post-container")){
+      const [post, id] = target.id.split("-");
+      
+      const urlParams = new URLSearchParams(window.location.search);
+      urlParams.set("post_id", id);
+      urlParams.set("modal", true);
+      const newUrl = `${window.location.origin}${window.location.pathname}?${urlParams.toString()}`;
+      
+      window.history.pushState({ path: newUrl }, '', newUrl);
+      window.location.href = newUrl;
+     
+  }
+ ////////////////////////////////////////////////////////
+
+  })
+
+  /////////// Input de pesquisa para filtrar os posts //////////////////////
   const searchInput = document.querySelector("#search-input")
 
   searchInput.addEventListener('change', (e) => {
@@ -31,4 +64,26 @@
 
   searchInput.value = getParams('search') || '';
   ///////////////////////////////////////////////////////////////
+
+  // Post FormValidation
+  const title = document.getElementById("post-title")
+  const content = document.getElementById("post-content")
+  const btnEnviar = document.getElementById("btn-enviar")
+
+  btnEnviar.addEventListener("click", (e) => {
+    [title, content].forEach(item => {
+    item.classList.remove('invalid');
+    const value = item.value;
+
+    if(!value.length){
+      item.classList.add("invalid");
+      e.preventDefault();
+    }
+  })
+  })
+
+///////////////////////////
+
+
+
 </script>

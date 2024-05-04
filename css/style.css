@@ -96,6 +96,7 @@
   height: 100%;
   min-height: 190px;
   max-height: 190px;
+  pointer-events: none;
 }
 
 .post-container .avatar img {
@@ -137,4 +138,12 @@
   gap: 2px;
   font-size: 14px;
   color: #6c757d;
+}
+
+.post-input.invalid {
+  border-color: red !important;
+}
+
+.post-input.invalid::placeholder {
+  color: red !important;
 }

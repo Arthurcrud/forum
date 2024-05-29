@@ -148,7 +148,33 @@
   color: red !important;
 }
 
-.welcome-message { 
+.welcome-message {
   color: #fff;
   margin-left: 15px;
- }
+}
+
+.avisos-container {
+  padding: 1rem 0.6rem;
+}
+
+.avisos-container .content {
+  display: flex;
+  flex-direction: column;
+}
+
+.avisos-container .content-title {
+  color: #00adbb;
+  font-size: 18px;
+  font-weight: 600;
+  display: block;
+  padding-bottom: 4px;
+}
+
+.posted-by {
+  font-size: 12px;
+}
+
+hr{
+  opacity:.25;
+  margin:0;
+}

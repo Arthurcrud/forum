@@ -21,24 +21,24 @@ include_once "php_actions/db_connection.php";
 			</div>
 
 			<?php
-			 if (isset($_SESSION['user_id']) && isset($_SESSION['role_id'])){
-				if($_SESSION['role_id'] == 1){
+			if (isset($_SESSION['user_id']) && isset($_SESSION['role_id'])) {
+				if ($_SESSION['role_id'] == 1) {
+					?>
+											<div class="main--sidebar__btn-container">
+												<a class="waves-effect waves-light modal-trigger btn blue main--sidebar__btn"
+													style="width:100%; margin-top:15px;" href="#modal3">
+													<i class="ph-bold ph-plus"></i>
+													<span>
+														Novo aviso
+													</span>
+												</a>
+											</div>
+											<?php
+				}
+			}
 			?>
-			<div class="main--sidebar__btn-container">
-				<a class="waves-effect waves-light modal-trigger btn blue main--sidebar__btn"
-					style="width:100%; margin-top:15px;" href="#modal3">
-					<i class="ph-bold ph-plus"></i>
-					<span>
-						Novo aviso
-					</span>
-				</a>
-			</div>
+		<div class="list-container">
 			<?php
-			 }
-			 }
-			?>
-
-			<?php 
 			$sql = "SELECT 
             avisos.*, 
             users.username, 
@@ -47,22 +47,23 @@ include_once "php_actions/db_connection.php";
             avisos 
         INNER JOIN 
             users ON avisos.user_id = users.id";
-			 $res = mysqli_query($connect, $sql);
+			$res = mysqli_query($connect, $sql);
 
-			 while($dados = mysqli_fetch_array($res)){
-			?>
-	<div class = "col s9">
-		<div class = "avisos-container" id="avisos-<?php echo $dados['id'] ?>">
-			<div class = "content">
-				<P class="content-title"><?php echo $dados ['title'] ?></P>
-				<p><?php echo $dados ['content'] ?></p>
-				<p><span style="color: blue"><?php echo $dados['username'] ?></span> postado a <span style="font-weight:600"><?php echo $dados['minutes'] ?> minutos atrás</span></p>
-			</div>
-		</div>
-	</div>
-			<?php
+			while ($dados = mysqli_fetch_array($res)) {
+				?>
+				
+						<div class = "avisos-container" id="avisos-<?php echo $dados['id'] ?>">
+							<div class = "content">
+								<p class="content-title"><?php echo $dados['title'] ?></p>
+								<p><?php echo $dados['content'] ?></p>
+								<p class="posted-by"><span style="color: blue"><?php echo $dados['username'] ?></span> postado a <span style="font-weight:600"><?php echo $dados['minutes'] ?> minutos atrás</span></p>
+							</div>
+						</div>
+						<hr>
+						<?php
 			}
 			?>
+		</div>
 
 		</div>
 		<div class="col s9">
@@ -170,16 +171,16 @@ if (isset($_GET['post_id'])) {
 	$sql = "SELECT * FROM posts WHERE id = $postId";
 	$resultado = mysqli_query($connect, $sql);
 
-	if (mysqli_num_rows($resultado) > 0) {
+	if (mysqli_num_rows($resultado) > 0 && isset($_SESSION['user_id'])) {
 		$post = mysqli_fetch_assoc($resultado);
 		$duser = $_SESSION['user_id'];
-		$post_owner = $post ['user_id'];
+		$post_owner = $post['user_id'];
 
 		$sql_user = "SELECT role_id FROM users WHERE id = $duser";
-        $resultado_user = mysqli_query($connect, $sql_user);
-        $user_data = mysqli_fetch_assoc($resultado_user);
-        $role_id = $user_data['role_id'];
-		
+		$resultado_user = mysqli_query($connect, $sql_user);
+		$user_data = mysqli_fetch_assoc($resultado_user);
+		$role_id = $user_data['role_id'];
+
 		?>
 			<div id="modal2" class="modal">
 				<form action="php_actions/update_post.php" method="post">
@@ -193,16 +194,16 @@ if (isset($_GET['post_id'])) {
 						<textarea required ="60" rows="40" name="content" placeholder="Escreva sua postagem..." id="post-content" class="post-input" ><?php echo $post['content'] ?></textarea>
 					</div>
 					<div class="modal-footer">
-						<?php 
-						if ($duser == $post_owner || $role_id == 1 || $role_id == 3):?>
-						<button class="waves-effect waves-green btn blue" name="btn-enviar" id="btn-enviar">Enviar</button>
-						<button type="button" class="waves-effect waves-green btn red delete-btn">Apagar</button>
-						<?php endif;?>
+						<?php
+						if ($duser == $post_owner || $role_id == 1 || $role_id == 3): ?>
+										<button class="waves-effect waves-green btn blue" name="btn-enviar" id="btn-enviar">Enviar</button>
+										<button type="button" class="waves-effect waves-green btn red delete-btn">Apagar</button>
+						<?php endif; ?>
 					</div>
 				</form>
 			</div>
 		<?php
-}
+	}
 }
 ?>
 

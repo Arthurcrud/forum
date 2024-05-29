@@ -18,6 +18,12 @@
   postContainer?.addEventListener("click", (e) => {
     const target = e.target;
 
+    <?php
+    if (!isset($_SESSION['user_id'])) {
+      echo "return";
+    }
+    ?>
+
     if(target.classList.contains("post-container")){
       const [post, id] = target.id.split("-");
       const urlParams = new URLSearchParams(window.location.search);

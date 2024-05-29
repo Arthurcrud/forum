@@ -102,6 +102,4 @@ deletePostBtn.addEventListener("click", async (e) => {
   }
 })
 
-
-
 </script>

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04-Maio-2024 às 03:30
+-- Tempo de geração: 29/05/2024 às 18:01
 -- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.2.12
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `categories`
+-- Estrutura para tabela `avisos`
+--
+
+CREATE TABLE `avisos` (
+  `id` int(11) NOT NULL,
+  `content` text DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `avisos`
+--
+
+INSERT INTO `avisos` (`id`, `content`, `title`, `created_at`, `user_id`) VALUES
+(1, 'aviso', 'voce foi avisado', '0000-00-00 00:00:00', 9);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `categories`
 --
 
 CREATE TABLE `categories` (
@@ -36,7 +57,7 @@ CREATE TABLE `categories` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `comments`
+-- Estrutura para tabela `comments`
 --
 
 CREATE TABLE `comments` (
@@ -49,7 +70,7 @@ CREATE TABLE `comments` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `posts`
+-- Estrutura para tabela `posts`
 --
 
 CREATE TABLE `posts` (
@@ -61,16 +82,16 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `posts`
+-- Despejando dados para a tabela `posts`
 --
 
 INSERT INTO `posts` (`id`, `content`, `user_id`, `title`, `created_at`) VALUES
-(1, 'Helloo 22 :(\r\n<br>\r\nI\'m newbie with laravel and i want to fetch data from database in realtime for my dashboard anaytics and i found a solution with ajax but it dosen\'t work if any one have a simple solution it will be helpful\r\n\r\nThank', 1, 'Seloko fi', '2024-05-03 00:03:15');
+(30, 'Testando', 9, 'Opaa', '2024-05-18 22:44:04');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `roles`
+-- Estrutura para tabela `roles`
 --
 
 CREATE TABLE `roles` (
@@ -79,7 +100,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `roles`
+-- Despejando dados para a tabela `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`) VALUES
@@ -90,7 +111,7 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `users`
+-- Estrutura para tabela `users`
 --
 
 CREATE TABLE `users` (
@@ -103,52 +124,68 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `users`
+-- Despejando dados para a tabela `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role_id`, `created_at`) VALUES
-(1, 'Patrick', 'patrick8fontes@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 1, '2024-05-03 00:01:54');
+(9, 'Eva', 'eva94@gmail.com', '$2y$10$qYVJxmDKvWOfivetSGgNzeU3A84Ow3wa2tBjwot7us7WnW6ZfyCpu', 1, '2024-05-04 23:27:53'),
+(11, 'jao&lt;&gt;', 'jao@gmail.com', '$2y$10$X2AhDNtZ2RKpwDLLxJjyd.hEr4sK.stiFuFRkd7Coc/VNBRM29P.K', 2, '2024-05-06 04:33:47'),
+(14, 'crudlion', 'crud@gmail.com', '$2y$10$Glw1CdbO2VhkVzyKoejAVelF55En2KIZkbNqv6F678o2tax1eaNRi', 3, '2024-05-12 01:59:30'),
+(15, 'luan', 'luan@gmail.com', '$2y$10$gzIhNu/yAuG7AN2SeHp1/O9kI6okFQfmUZbNhfN2FqYoLnbgnJsze', 2, '2024-05-12 02:34:00');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `categories`
+-- Índices de tabela `avisos`
+--
+ALTER TABLE `avisos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk1avisos` (`user_id`);
+
+--
+-- Índices de tabela `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `comments`
+-- Índices de tabela `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `post_id` (`post_id`);
 
 --
--- Índices para tabela `posts`
+-- Índices de tabela `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- Índices para tabela `roles`
+-- Índices de tabela `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `users`
+-- Índices de tabela `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `role_id` (`role_id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `avisos`
+--
+ALTER TABLE `avisos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `categories`
@@ -166,7 +203,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT de tabela `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de tabela `roles`
@@ -178,26 +215,32 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `comments`
+-- Restrições para tabelas `avisos`
+--
+ALTER TABLE `avisos`
+  ADD CONSTRAINT `fk1avisos` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Restrições para tabelas `comments`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
 
 --
--- Limitadores para a tabela `posts`
+-- Restrições para tabelas `posts`
 --
 ALTER TABLE `posts`
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Limitadores para a tabela `users`
+-- Restrições para tabelas `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`);

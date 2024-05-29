@@ -1,14 +1,15 @@
 <?php
 include_once "../includes/functions.php";
+include_once "../includes/message.php";
 require_once '../php_actions/db_connection.php';
 
 session_start();
 
 if (isset($_SESSION["user_id"])) {
 
-  $title = mysqli_escape_string($connect, $_POST['title']);
-  $content = mysqli_escape_string($connect, $_POST['content']);
-  $postId = mysqli_escape_string($connect, $_POST['id']);
+  $title = clear($_POST['title']);
+  $content = clear($_POST['content']);
+  $postId = clear($_POST['id']);
 
   $sql = "UPDATE posts SET title = '$title', content = '$content' WHERE posts.id = $postId";
   $result = mysqli_query($connect, $sql);

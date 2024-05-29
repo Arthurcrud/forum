@@ -13,18 +13,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result && mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
-        $user_password = hash('sha256', $password);
-        var_dump($user_password);
-        if ($user_password == $user["password"]) {
+        $user_password_hash = $user["password"];
+        if (password_verify($password, $user_password_hash)) {
             $_SESSION["user_id"] = $user["id"];
             $_SESSION["username"] = $user["username"];
-            header("Location: ../index.php");
+            $_SESSION["role_id"] = $user["role_id"];
+
+            header("Location:../index.php");
             exit();
         } else {
-            $error_message = "Senha incorreta. Por favor, tente novamente.";
+            $_SESSION['message'] = "Senha incorreta";
         }
     } else {
-        $error_message = "Usuário não encontrado. Por favor, verifique seu e-mail.";
+        $_SESSION['message'] = "Usuário não encontrado, verifique seu email";
     }
 }
 ?>
@@ -48,3 +49,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php
     include_once '../includes/footer.php';
     ?>
+
+    

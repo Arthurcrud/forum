@@ -3,9 +3,9 @@ include_once "db_connection.php";
 include_once "../includes/message.php";
 session_start();
 
-if (isset($_GET['post_id'])) {
-  $postId = $_GET['post_id'];
-  $sql = "DELETE FROM posts WHERE posts.id = $postId";
+if (isset($_GET['avisos_id'])) {
+  $avisoId = $_GET['avisos_id'];
+  $sql = "DELETE FROM avisos WHERE avisos.id = $avisoId";
   $result = mysqli_query($connect, $sql);
   
   if ($result) {

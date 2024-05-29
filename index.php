@@ -20,6 +20,50 @@ include_once "php_actions/db_connection.php";
 				</a>
 			</div>
 
+			<?php
+			 if (isset($_SESSION['user_id']) && isset($_SESSION['role_id'])){
+				if($_SESSION['role_id'] == 1){
+			?>
+			<div class="main--sidebar__btn-container">
+				<a class="waves-effect waves-light modal-trigger btn blue main--sidebar__btn"
+					style="width:100%; margin-top:15px;" href="#modal3">
+					<i class="ph-bold ph-plus"></i>
+					<span>
+						Novo aviso
+					</span>
+				</a>
+			</div>
+			<?php
+			 }
+			 }
+			?>
+
+			<?php 
+			$sql = "SELECT 
+            avisos.*, 
+            users.username, 
+            TIMESTAMPDIFF(MINUTE, avisos.created_at, NOW()) AS minutes 
+        FROM 
+            avisos 
+        INNER JOIN 
+            users ON avisos.user_id = users.id";
+			 $res = mysqli_query($connect, $sql);
+
+			 while($dados = mysqli_fetch_array($res)){
+			?>
+	<div class = "col s9">
+		<div class = "avisos-container" id="avisos-<?php echo $dados['id'] ?>">
+			<div class = "content">
+				<P class="content-title"><?php echo $dados ['title'] ?></P>
+				<p><?php echo $dados ['content'] ?></p>
+				<p><span style="color: blue"><?php echo $dados['username'] ?></span> postado a <span style="font-weight:600"><?php echo $dados['minutes'] ?> minutos atrás</span></p>
+			</div>
+		</div>
+	</div>
+			<?php
+			}
+			?>
+
 		</div>
 		<div class="col s9">
 			<div class="content-header">
@@ -128,6 +172,14 @@ if (isset($_GET['post_id'])) {
 
 	if (mysqli_num_rows($resultado) > 0) {
 		$post = mysqli_fetch_assoc($resultado);
+		$duser = $_SESSION['user_id'];
+		$post_owner = $post ['user_id'];
+
+		$sql_user = "SELECT role_id FROM users WHERE id = $duser";
+        $resultado_user = mysqli_query($connect, $sql_user);
+        $user_data = mysqli_fetch_assoc($resultado_user);
+        $role_id = $user_data['role_id'];
+		
 		?>
 			<div id="modal2" class="modal">
 				<form action="php_actions/update_post.php" method="post">
@@ -141,8 +193,11 @@ if (isset($_GET['post_id'])) {
 						<textarea required ="60" rows="40" name="content" placeholder="Escreva sua postagem..." id="post-content" class="post-input" ><?php echo $post['content'] ?></textarea>
 					</div>
 					<div class="modal-footer">
+						<?php 
+						if ($duser == $post_owner || $role_id == 1 || $role_id == 3):?>
 						<button class="waves-effect waves-green btn blue" name="btn-enviar" id="btn-enviar">Enviar</button>
 						<button type="button" class="waves-effect waves-green btn red delete-btn">Apagar</button>
+						<?php endif;?>
 					</div>
 				</form>
 			</div>
@@ -150,6 +205,23 @@ if (isset($_GET['post_id'])) {
 }
 }
 ?>
+
+	 <div id="modal3" class="modal">
+	<form action="php_actions/register_avisos.php" method="post">
+		<div class="blue modal-title">
+			<p>New aviso</p>
+		</div>
+		<div class="modal-content">
+			<p>title</p>
+			<input required ="text" placeholder="Enter Title" name="title" id="post-title" class="post-input" >
+			<textarea required ="60" rows="40" name="content" placeholder="Escreva sua postagem..." id="post-content" class="post-input" ></textarea>
+		</div>
+		<div class="modal-footer">
+			<button class="waves-effect waves-green btn blue" name="btn-enviar" id="btn-enviar">Enviar</button>
+			<!-- <a href="postagem_criar.php" class="modal-close waves-effect waves-green btn-flat">Criar</a> -->
+		</div>
+	</form>
+</div>
 
 
 <?php
